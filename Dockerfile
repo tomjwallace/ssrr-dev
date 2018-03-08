@@ -1,20 +1,18 @@
 FROM alpine:latest
 
-ENV SERVER_PORT 80 443
+ENV SERVER_PORT 51348
 
 ARG BRANCH=akkariiin/dev
 ARG DIR_NAME=akkariiin-dev
-ARG WORK=ssrr
 
 RUN apk update --no-cache upgrade \
     && apk --no-cache add libsodium python \
-    && mkdir -p $WORK \
-    && wget -qO- --no-check-certificate https://github.com/shadowsocksrr/shadowsocksr/archive/$BRANCH.tar.gz | tar -xzf - -C $WORK \
+    && wget -qO- --no-check-certificate https://github.com/shadowsocksrr/shadowsocksr/archive/$BRANCH.tar.gz | tar -xzf - -C . \
+    && cp -R shadowsocksr-$DIR_NAME/shadowsocks . \
     && apk del wget
 
-WORKDIR $WORK/shadowsocksr-$DIR_NAME/shadowsocks
-COPY user-config.json ../config.json
-
+WORKDIR shadowsocks
+COPY user-config.json ./user-config.json
 
 EXPOSE $SERVER_PORT
 ENTRYPOINT [ "python", "server.py"]
