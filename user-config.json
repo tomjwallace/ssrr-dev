@@ -1,0 +1,20 @@
+{
+    "server": "0.0.0.0",
+    "local_address": "127.0.0.1",
+    "local_port": 1080,
+    "port_password": {
+        "80": {
+            "obfs": "http_simple",
+            "method": "chacha20"
+        },
+        "443": {
+            "obfs": "tls1.2_ticket_auth",
+            "method": "aes-256-cfb"
+        }
+    },
+    "timeout": 300,
+    "protocol": "auth_aes128_md5",
+    "password": "ssrr-dockerfile", // Please change your password
+    "protocol_param": "16#",
+    "user": "nobody"
+}
