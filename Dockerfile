@@ -1,5 +1,7 @@
 FROM alpine:3.7
 
+LABEL maintainer="fzitou <jzitou@gmail.com>"
+
 ARG TZ='Asia/Shanghai'
 ARG BRANCH=akkariiin/dev
 ARG DIR_NAME=akkariiin-dev
